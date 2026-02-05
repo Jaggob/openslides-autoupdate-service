@@ -3,7 +3,7 @@ module github.com/OpenSlides/openslides-autoupdate-service
 go 1.25.0
 
 require (
-	github.com/OpenSlides/openslides-go v0.0.0-20260117182827-16bc6fca364e
+	github.com/OpenSlides/openslides-go v0.0.0-20260205172316-874c7fb23845
 	github.com/alecthomas/kong v1.13.0
 	github.com/klauspost/compress v1.18.2
 	github.com/nsf/jsondiff v0.0.0-20230430225905-43f6cf3098c1
