@@ -102,21 +102,6 @@ func (m Mediafile) see(ctx context.Context, ds *dsfetch.Fetch, mediafileIDs ...i
 				return true, nil
 			}
 
-			// Allow profile images if the request user can see the linked user.
-			profileImageUserIDs, err := ds.Mediafile_ProfileImageUserIDs(mediafileID).Value(ctx)
-			if err != nil {
-				return false, fmt.Errorf("getting profile image user ids: %w", err)
-			}
-
-			canSeeUser, err := Collection(ctx, User{}.Name()).Modes("A")(ctx, ds, profileImageUserIDs...)
-			if err != nil {
-				return false, fmt.Errorf("can see user of profile image %d: %w", mediafileID, err)
-			}
-
-			if len(canSeeUser) >= 1 {
-				return true, nil
-			}
-
 			if published.Null() && collection == "organization" {
 				return false, nil
 			}
@@ -135,6 +120,20 @@ func (m Mediafile) see(ctx context.Context, ds *dsfetch.Fetch, mediafileIDs ...i
 				return true, nil
 			}
 
+			// Allow profile images if the request user can see the linked profile image.
+			profileImageIDs, err := ds.Mediafile_ProfileImageIDs(mediafileID).Value(ctx)
+			if err != nil {
+				return false, fmt.Errorf("getting profile image ids: %w", err)
+			}
+
+			canSeeProfileImage, err := Collection(ctx, ProfileImage{}.Name()).Modes("A")(ctx, ds, profileImageIDs...)
+			if err != nil {
+				return false, fmt.Errorf("can see profile image of mediafile %d: %w", mediafileID, err)
+			}
+
+			if len(canSeeProfileImage) >= 1 {
+				return true, nil
+			}
 			return false, nil
 		})
 	})

@@ -161,6 +161,7 @@ var collectionMap = map[string]Restricter{
 	HistoryPosition{}.Name():              HistoryPosition{},
 	ImportPreview{}.Name():                ImportPreview{},
 	Mediafile{}.Name():                    Mediafile{},
+	ProfileImage{}.Name():                 ProfileImage{},
 	Meeting{}.Name():                      Meeting{},
 	MeetingMediafile{}.Name():             MeetingMediafile{},
 	MeetingUser{}.Name():                  MeetingUser{},
