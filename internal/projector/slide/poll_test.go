@@ -278,7 +278,7 @@ func TestPollSingleVotes(t *testing.T) {
 	        votescast: "2.000000"
 	        global_option_id: 3
 	        meeting_id: 111
-	        entitled_users_at_stop: [{"voted": false, "present": true, "user_id": 1, "vote_delegated_to_user_id": 2}, {"voted": false, "present": true, "user_id": 4, "user_merged_into_id": 6}]
+	        entitled_users_at_stop: [{"voted": false, "present": true, "user_id": 1, "vote_delegated_to_user_ids": [2]}, {"voted": false, "present": true, "user_id": 4, "user_merged_into_id": 6}]
 	motion:
 	    1:
 	        title: Motion title 1
@@ -376,7 +376,7 @@ func TestPollSingleVotes(t *testing.T) {
 						"voted": false,
 						"present": true,
 						"user_id": 1,
-						"vote_delegated_to_user_id": 2,
+						"vote_delegated_to_user_ids": [2],
 						"user": {
 							"id": 1,
 							"title": "Billy",
