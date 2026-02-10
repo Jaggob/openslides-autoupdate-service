@@ -73,6 +73,17 @@ make run-tests
 Curl needs the flag `-N / --no-buffer` or it can happen, that the output is not
 printed immediately.
 
+## Permissions
+
+The autoupdate service filters poll live voting data based on user permissions.
+Access to `poll/live_votes` is granted when at least one of the following
+conditions is true:
+
+* The user is allowed to see participants (permission `user.can_see`).
+* The poll itself allows progress visibility (`poll.can_see_progress`).
+* The user can manage polls of the related content object (motions, topics, or assignments).
+
+If none of these apply, `live_votes` is filtered out on the autoupdate level.
 
 ### HTTP requests
 
