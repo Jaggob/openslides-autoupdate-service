@@ -235,6 +235,38 @@ func TestUserModeA(t *testing.T) {
 	)
 
 	testCase(
+		"Vote delegated to multiple, request user at a non-first position",
+		t,
+		f,
+		true,
+		`---
+		user/1/meeting_user_ids: [10]
+		user/2/meeting_user_ids: [20]
+		user/3/meeting_user_ids: [30]
+
+		meeting_user:
+			10:
+				user_id: 1
+				meeting_id: 3
+				group_ids: [7]
+			20:
+				user_id: 2
+				meeting_id: 3
+				vote_delegated_to_ids: [10, 30]
+				group_ids: [7]
+			30:
+				user_id: 3
+				meeting_id: 3
+				group_ids: [7]
+		group/7/id: 7
+
+		meeting/3/admin_group_id: 1
+		`,
+		withRequestUser(3),
+		withElementID(2),
+	)
+
+	testCase(
 		"Vote delegated from",
 		t,
 		f,
